@@ -10,7 +10,7 @@ use App\Usuario;
 use App\Http\Requests\UsuarioFormRequest;
 use DB;
 
-class UsuarioController extends Controller
+class UserController extends Controller
 {
     //
     public function __construct(){
@@ -20,8 +20,8 @@ class UsuarioController extends Controller
     public function index(Request $request){
     	if($request){
     		$query=trim($request->get('searchText'));
-    		$usuarios=DB::table('users')
-			->where('name', 'LIKE', '%'.$query.'%')
+    		$usuarios=DB::table('user')
+            ->where('name', 'LIKE', '%'.$query.'%')
             ->where('email', 'LIKE', '%'.$query.'%')
             ->where('telefone', 'LIKE', '%'.$query.'%')
             ->orderBy('id', 'asc')
@@ -37,7 +37,7 @@ class UsuarioController extends Controller
  
     public function store(UsuarioFormRequest $request){
     	$usuarios = new Usuario;
-		$usuarios->nome=$request->get('nome');
+		$usuarios->name=$request->get('nome');
         $usuarios->email=$request->get('email');
         $usuarios->telefone=$request->get('telefone');
         $usuarios->placaDoCarro=$request->get('placaDoCarro');
