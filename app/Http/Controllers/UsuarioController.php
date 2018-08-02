@@ -16,7 +16,9 @@ class UsuarioController extends Controller
     public function __construct(){
 		//
 		$this->middleware('auth');
-    }
+	}
+	
+	
     public function index(Request $request){
     	if($request){
     		$query=trim($request->get('searchText'));
@@ -71,6 +73,8 @@ class UsuarioController extends Controller
     	return Redirect::to('usuarios');
     }
 
-    
+    public function index2(){
+		return Usuario::all();
+	}
 
 }
