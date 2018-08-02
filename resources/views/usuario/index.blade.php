@@ -14,15 +14,15 @@
 				<thead>
 					<th>Id</th>
 					<th>Nome</th>
-                    <th>Email</th>
+                    <th>Telefone</th>
 					
 					<!--<th>Opções</th>-->
 				</thead>
-                @foreach ($usuarios as $user)
+                @foreach ($usuarios as $usuarios)
 				<tr>
-					<td>{{ $user->id}}</td>
-					<td>{{ $user->name}}</td>
-					<td>{{ $user->telefone}}</td>
+					<td>{{ $usuarios->idUsuarios}}</td>
+					<td>{{ $usuarios->nome}}</td>
+					<td>{{ $usuarios->telefone}}</td>
 					
 				</tr>
 				

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Redirect;
 
 use App\TestDrive;
 use App\Http\Requests\TestDriveFormRequest;
+use App\Http\Requests\ConcessionariaFormRequest;
+use App\Http\Requests\UsuarioFormRequest;
 use DB;
 
 class TestDriveController extends Controller
@@ -63,6 +65,18 @@ class TestDriveController extends Controller
     	return Redirect::to('testDrives');
     }
 
-    
+    public function indexList(Request $request){
+    	if($request){
+    		$query=trim($request->get('searchText'));
+    		$usuarios=DB::table('testDrives')
+            ->where('data', 'LIKE', '%'.$query.'%')
+            
+            ->orderBy('idTestDrives', 'asc')
+    		->paginate(7);
+    		return view('testDrive.index', [
+    			"testDrives"=>$testDrives, "searchText"=>$query
+    			]);
+        }
+    }
 
 }

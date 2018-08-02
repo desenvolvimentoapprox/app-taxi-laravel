@@ -20,9 +20,11 @@ class UsuarioController extends Controller
     public function index(Request $request){
     	if($request){
     		$query=trim($request->get('searchText'));
-    		$usuarios=DB::table('users')
-			->where('name', 'LIKE', '%'.$query.'%')
+    		$usuarios=DB::table('usuarios')
+			->where('nome', 'LIKE', '%'.$query.'%')
             ->where('email', 'LIKE', '%'.$query.'%')
+            ->where('placaDoCarro', 'LIKE', '%'.$query.'%')
+            ->where('idAparelho', 'LIKE', '%'.$query.'%')
             ->where('telefone', 'LIKE', '%'.$query.'%')
             ->orderBy('id', 'asc')
     		->paginate(7);
