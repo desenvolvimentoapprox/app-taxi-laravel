@@ -10,7 +10,7 @@ use App\Usuario;
 use App\Http\Requests\UsuarioFormRequest;
 use DB;
 
-class UsuarioController extends Controller
+class UsuarioApiController extends Controller
 {
     //
     public function __construct(){
@@ -26,8 +26,15 @@ class UsuarioController extends Controller
         
     }
  
-    public function store(){
-    	
+    public function store(Request $request){
+    	$usuarios = new Usuario;
+		$usuarios->nome=$request->get('nome');
+        $usuarios->email=$request->get('email');
+        $usuarios->telefone=$request->get('telefone');
+        $usuarios->placaDoCarro=$request->get('placaDoCarro');
+		$usuarios->idAparelho=$request->get('idAparelho');
+    	$usuarios->save();
+    	return $usuarios;
     }
     
     public function show($idUsuarios){

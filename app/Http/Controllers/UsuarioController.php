@@ -30,9 +30,7 @@ class UsuarioController extends Controller
             ->where('telefone', 'LIKE', '%'.$query.'%')
             ->orderBy('id', 'asc')
     		->paginate(7);
-    		return view('usuario.index', [
-    			"usuarios"=>$usuarios, "searchText"=>$query
-    			]);
+    		return Usuario::all();;
         }
     }
     public function create(){
@@ -47,7 +45,7 @@ class UsuarioController extends Controller
         $usuarios->placaDoCarro=$request->get('placaDoCarro');
 		$usuarios->idAparelho=$request->get('idAparelho');
     	$usuarios->save();
-    	return Redirect::to('usuarios');
+    	return $usuarios;
     }
     public function show($idUsuarios){
     	return view("usuario.show", 

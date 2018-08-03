@@ -12,7 +12,7 @@ use App\Http\Requests\ConcessionariaFormRequest;
 use App\Http\Requests\UsuarioFormRequest;
 use DB;
 
-class TestDriveController extends Controller
+class TestDriveApiController extends Controller
 {
     //
     public function __construct(){
@@ -21,18 +21,10 @@ class TestDriveController extends Controller
     }
 
     public function index(Request $request){
-    	if($request){
-    		$query=trim($request->get('searchText'));
-    		$testDrives=DB::table('testDrives')
-            ->where('data', 'LIKE', '%'.$query.'%')
-            
-            ->orderBy('idTestDrives', 'asc')
-    		->paginate(7);
-    		//return $testDrives;
-        }
+    	return TestDrive::all();
     }
     public function create(){
-    	//return view("testDrive.create");
+    	return view("testDrive.create");
     }
  
     public function store(TestDriveFormRequest $request){
@@ -40,11 +32,11 @@ class TestDriveController extends Controller
         $testDrives->data=$request->get('data');
         $testDrives->concessionaria_id=$request->get('concessionaria_id');
         $testDrives->save();
-    	//return $testDrives;
+    	return $testDrives;
     }
     public function show($idTestDrives){
-    	//return view("testDrive.show", 
-    		//["testDrives"=>TestDrive::findOrFail($idTestDrives)]);
+    	return view("testDrive.show", 
+    		["testDrives"=>TestDrive::findOrFail($idTestDrives)]);
     }
     public function edit($idTestDrives){
     	return view("testDrive.edit", 
@@ -63,6 +55,19 @@ class TestDriveController extends Controller
     	return Redirect::to('testDrives');
     }
 
-    
+    public function indexList(Request $request){
+    	if($request){
+    		$query=trim($request->get('searchText'));
+    		$usuarios=DB::table('testDrives')
+            ->where('data', 'LIKE', '%'.$query.'%')
+            
+            ->orderBy('idTestDrives', 'asc')
+    		->paginate(7);
+    		return view('testDrive.index', [
+    			"testDrives"=>$testDrives, "searchText"=>$query
+    			]);
+        }
+    }
 
 }
+

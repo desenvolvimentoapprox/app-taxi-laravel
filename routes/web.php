@@ -21,6 +21,11 @@ Route::resource('/usuarios', 'UsuarioController');
 Route::resource('/concessionarias', 'ConcessionariaController');
 Route::resource('/testDrives', 'TestDriveController');
 
+Route::resource('/usuariosapi', 'UsuarioApiController');
+Route::resource('/testdrivesapi', 'TestDriveApiController');
+
+
+
 
 
 
